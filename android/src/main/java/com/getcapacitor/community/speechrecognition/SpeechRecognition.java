@@ -340,13 +340,9 @@ public class SpeechRecognition extends Plugin implements Constants {
                 JSArray jsArray = new JSArray(matches);
 
                 if (this.call != null) {
-                    if (!this.partialResults) {
-                        this.call.resolve(new JSObject().put("status", "success").put("matches", jsArray));
-                    } else {
-                        JSObject ret = new JSObject();
-                        ret.put("matches", jsArray);
-                        notifyListeners("segmentResults", ret);
-                    }
+                    JSObject ret = new JSObject();
+                    ret.put("matches", jsArray);
+                    notifyListeners("segmentResults", ret);
                 }
             } catch (Exception ex) {
                 this.call.resolve(new JSObject().put("status", "error").put("message", ex.getMessage()));
